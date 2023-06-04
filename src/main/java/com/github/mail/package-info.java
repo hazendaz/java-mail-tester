@@ -1,5 +1,5 @@
 /*
- * base-parent (https://github.com/hazendaz/base-parent)
+ * java-mail-tester (https://github.com/hazendaz/java-mail-tester)
  *
  * Copyright 2019-2023 Hazendaz.
  *
