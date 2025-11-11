@@ -1,7 +1,7 @@
 /*
  * java-mail-tester (https://github.com/hazendaz/java-mail-tester)
  *
- * Copyright 2019-2023 Hazendaz.
+ * Copyright 2019-2025 Hazendaz.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of The Apache Software License,
@@ -13,24 +13,25 @@
  */
 package com.github.mail;
 
-import java.io.File;
-import java.util.Properties;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.Authenticator;
+import jakarta.mail.BodyPart;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import java.nio.file.Path;
+import java.util.Properties;
 
 /**
  * Code adapted from https://community.oracle.com/thread/4052611 to confirm 'dat' file conversion of pdf in java mail
@@ -72,7 +73,7 @@ public class TestMailIssue {
         props.put("mail.smtp.host", SMTP_HOST);
         props.put("mail.smtp.port", SMTP_HOST_PORT);
 
-        Session mailSession = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+        Session mailSession = Session.getDefaultInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(SENDER, SMTP_HOST_PWD);
@@ -105,7 +106,7 @@ public class TestMailIssue {
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
 
-        DataSource source = new FileDataSource(new File(PATH_FILE_NAME).getAbsolutePath());
+        DataSource source = new FileDataSource(Path.of(PATH_FILE_NAME).toFile().getAbsolutePath());
 
         messageBodyPart = new MimeBodyPart();
         messageBodyPart.setDataHandler(new DataHandler(source));
