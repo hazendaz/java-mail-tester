@@ -1,15 +1,6 @@
 /*
- * java-mail-tester (https://github.com/hazendaz/java-mail-tester)
- *
- * Copyright 2019-2025 Hazendaz.
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of The Apache Software License,
- * Version 2.0 which accompanies this distribution, and is available at
- * https://www.apache.org/licenses/LICENSE-2.0.txt
- *
- * Contributors:
- *     Hazendaz (Jeremy Landis).
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright 2019-2026 Hazendaz
  */
 package com.github.mail;
 
